@@ -1,75 +1,73 @@
-# React + TypeScript + Vite
+Markdown
+# Chronograph Series 01 — Interactive 3D Product Configurator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, interactive 3D timepiece configurator built with **React**, **TypeScript**, **Three.js**, **React Three Fiber**, and **Zustand**. Designed with a declarative scene architecture, strict type safety, and real-time material customization.
 
-Currently, two official plugins are available:
+![Project Preview](./public/preview.png)
+*(Tip: Use the built-in **Export PNG** button in your running app, save the image as `public/preview.png`, and commit it so your GitHub repo displays a live hero render.)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Declarative 3D Scene Graph:** Converted raw `.glb` assets into strongly-typed JSX components via `gltfjsx`, eliminating imperative scene traversal and preserving native PBR surface maps (carbon-fiber weave, metallic roughness, and physical glass).
+- **Independent Multi-Part Customization:** Real-time material color swapping across separate mesh targets (`Band_Carbon_Fiber`, `Band_Plastic`, and `Bezel_Frame`) managed through a decoupled Zustand store.
+- **Cinematic Camera Presets:** Smooth, frame-rate-independent camera damping (`THREE.MathUtils.damp`) that automatically frames the **Overview**, **Dial & Bezel**, or **Strap** on selection while yielding immediately to manual `OrbitControls` interaction.
+- **Dynamic Pricing & Studio HUD:** Responsive glassmorphism overlay featuring live finish-based price calculation, one-click configuration reset, and high-resolution WebGL canvas PNG export.
+- **Strict TypeScript Compliance:** Built with `verbatimModuleSyntax` enabled and zero `any` types across 3D scene references, store actions, and UI components.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Framework:** React 19 + TypeScript + Vite
+- **3D Engine & Helpers:** Three.js, `@react-three/fiber`, `@react-three/drei`, `three-stdlib`
+- **State Management:** Zustand
+- **Styling:** Tailwind CSS
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Architecture
 
-```
+```text
+src/
+├── components/
+│   └── CameraRig.tsx            # Frame-rate-independent camera presets & PNG snapshot trigger
+├── store/
+│   └── useConfiguratorStore.ts  # Typed Zustand store for finishes, camera views, and pricing
+├── Product.tsx                  # Declarative, strictly-typed 3D watch component (gltfjsx)
+├── App.tsx                      # WebGL Canvas, studio lighting Stage, and floating HUD
+└── main.tsx                     # Application entry point
+Getting Started
+Prerequisites
+Node.js (v18 or higher)
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+npm
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Installation & Local Development
+Clone the repository:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Bash
+git clone [https://github.com/FOLADAVE/3d-watch-configurator.git](https://github.com/FOLADAVE/3d-watch-configurator.git)
+cd 3d-watch-configurator
+Install dependencies:
 
-```
+Bash
+npm install
+Start the development server:
+
+Bash
+npm run dev
+Build for production:
+
+Bash
+npm run build
+3D Asset Attribution
+Model: Khronos Group 3D Commerce Chronograph Watch (product.glb)
+
+Author
+Folarin Obajenihi
+
+Portfolio: folarin-obajenihi.vercel.app
+
+GitHub: @FOLADAVE
