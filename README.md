@@ -3,8 +3,8 @@ Markdown
 
 A high-performance, interactive 3D timepiece configurator built with **React**, **TypeScript**, **Three.js**, **React Three Fiber**, and **Zustand**. Designed with a declarative scene architecture, strict type safety, and real-time material customization.
 
-![Project Preview](./public/preview.png)
-*(Tip: Use the built-in **Export PNG** button in your running app, save the image as `public/preview.png`, and commit it so your GitHub repo displays a live hero render.)*
+![Project Preview](./public/3d-configurator.png)
+
 
 ---
 
